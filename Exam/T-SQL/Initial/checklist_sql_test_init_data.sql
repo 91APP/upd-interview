@@ -4,4 +4,9 @@ CREATE TABLE Checked (Checked_Id INT IDENTITY (1,1) NOT NULL, Checked_MemberId I
 
 INSERT INTO Member (Member_Name) VALUES ('Member A'), ('Member B')
 INSERT into Item (Item_Name) VALUES ('Item 1'), ('Item 2'), ('Item 3'), ('Item 4')
-INSERT INTO Checked (Checked_MemberId, Checked_ItemId) VALUES (1,1),( 1,3), (1,4) 
+
+DECLARE @MemberId INT;
+SELECT @MemberId = member_id FROM Member WHERE member_name = 'Member A'
+INSERT INTO Checked (Checked_MemberId, Checked_ItemId) VALUES (@MemberId,1),( @MemberId,3), (@MemberId,4) 
+SELECT @MemberId = member_id FROM Member WHERE member_name = 'Member B'
+INSERT INTO Checked (Checked_MemberId, Checked_ItemId) VALUES ( @MemberId,2)
