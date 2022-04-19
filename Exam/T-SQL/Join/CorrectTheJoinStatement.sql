@@ -1,8 +1,9 @@
 -- Incorrect SQL statement
 
 SELECT Item_Id, Item_name, Member_Id, Member_Name FROM Item 
-LEFT JOIN Checked ON Checked_Itemid = Item_Id
-LEFT JOIN Member ON Checked_MemberId = Member_Id AND Member_Name = 'Member A'
+INNER JOIN Checked ON Checked_Itemid = Item_Id
+INNER JOIN Member ON Checked_MemberId = Member_Id
+WHERE Member_Name = 'Member A'
 
 -- Expect results
 
