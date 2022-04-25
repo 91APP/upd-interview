@@ -1,7 +1,10 @@
+using MyCheckedList.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IMessageSender, EmailSender>();
 
 var app = builder.Build();
 
