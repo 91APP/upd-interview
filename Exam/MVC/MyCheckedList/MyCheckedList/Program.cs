@@ -1,10 +1,17 @@
-using MyCheckedList.Models;
+using Microsoft.EntityFrameworkCore;
+using MyCheckedList.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<MyDbContext>(options => {
+
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+    options.UseSqlServer(connectionString);
+}); 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IMessageSender, EmailSender>();
 
 var app = builder.Build();
 
