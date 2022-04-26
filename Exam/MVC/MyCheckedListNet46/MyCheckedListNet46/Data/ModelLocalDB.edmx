@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MyCheckListModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CheckedItem">
+          <Key>
+            <PropertyRef Name="CheckedItemId" />
+          </Key>
+          <Property Name="CheckedItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberName" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_CheckedItem_Members_MemberId">
+          <End Role="Members" Type="Self.Members" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CheckedItem" Type="Self.CheckedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="CheckedItem">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyCheckListModelStoreContainer">
+          <EntitySet Name="CheckedItem" EntityType="Self.CheckedItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CheckedItem_Members_MemberId" Association="Self.FK_CheckedItem_Members_MemberId">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="CheckedItem" EntitySet="CheckedItem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyCheckListModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CheckedItem">
+          <Key>
+            <PropertyRef Name="CheckedItemId" />
+          </Key>
+          <Property Name="CheckedItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_CheckedItem_Members_MemberId" FromRole="CheckedItem" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CheckedItems" Relationship="Self.FK_CheckedItem_Members_MemberId" FromRole="Members" ToRole="CheckedItem" />
+        </EntityType>
+        <Association Name="FK_CheckedItem_Members_MemberId">
+          <End Role="Members" Type="Self.Member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CheckedItem" Type="Self.CheckedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="CheckedItem">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyCheckListContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CheckedItems" EntityType="Self.CheckedItem" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <AssociationSet Name="FK_CheckedItem_Members_MemberId" Association="Self.FK_CheckedItem_Members_MemberId">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="CheckedItem" EntitySet="CheckedItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyCheckListModelStoreContainer" CdmEntityContainer="MyCheckListContext">
+          <EntitySetMapping Name="CheckedItems">
+            <EntityTypeMapping TypeName="MyCheckListModel.CheckedItem">
+              <MappingFragment StoreEntitySet="CheckedItem">
+                <ScalarProperty Name="CheckedItemId" ColumnName="CheckedItemId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="MyCheckListModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="MyCheckListModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

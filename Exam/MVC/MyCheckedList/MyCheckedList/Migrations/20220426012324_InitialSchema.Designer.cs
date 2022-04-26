@@ -11,7 +11,7 @@ using MyCheckedList.Data;
 namespace MyCheckedList.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220425092457_InitialSchema")]
+    [Migration("20220426012324_InitialSchema")]
     partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
