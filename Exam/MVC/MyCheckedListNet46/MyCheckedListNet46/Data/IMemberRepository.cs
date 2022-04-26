@@ -8,6 +8,8 @@ namespace MyCheckedListNet46.Data
 {
     public interface IMemberRepository
     {
-        Member GetMemberProfile();
+        Member GetMemberProfile(int memberId);
+
+        Member GetMemberProfile(string memberName);
     }
 }

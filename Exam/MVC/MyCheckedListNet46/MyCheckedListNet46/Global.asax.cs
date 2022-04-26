@@ -2,10 +2,6 @@
 using Autofac.Integration.Mvc;
 using MyCheckedListNet46.BusinessLogic;
 using MyCheckedListNet46.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -27,6 +23,8 @@ namespace MyCheckedListNet46
             builder.RegisterType<MyCheckListContext>().InstancePerRequest();
             builder.RegisterType<ItemRepository>().As<IItemRepository>();
             builder.RegisterType<ItemService>().As<IItemService>();
+            builder.RegisterType<MemberRepository>().As<IMemberRepository>();
+            builder.RegisterType<MemberService>().As<IMemberService>();
 
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

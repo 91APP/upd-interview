@@ -14,9 +14,9 @@ namespace MyCheckedListNet46.Data
             _context = context;
         }
 
-        public List<CheckedItem> GetMemberCheckedItems()
+        public List<CheckedItem> GetCheckedItemsByMemberId(int memberId)
         {
-            throw new NotImplementedException();
+            return _context.CheckedItems.Where(x => x.MemberId == memberId).ToList();
         }
     }
 }

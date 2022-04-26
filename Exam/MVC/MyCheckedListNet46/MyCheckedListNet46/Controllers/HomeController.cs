@@ -10,9 +10,11 @@ namespace MyCheckedListNet46.Controllers
     {
         public ActionResult Index()
         {
-
-            // TODO: 實作一個簡單的登入機制, 可以判斷出使用者是否已登入
-
+            // TODO: 實作 Action Filter 判斷使用者是否已登入
+            if (Session["MemberId"] == null)
+            {
+                return RedirectToAction("Login", "Member");
+            }
 
             // TODO: 實作資料表列, 條件為登入的使用者有勾選過的 Item
             //

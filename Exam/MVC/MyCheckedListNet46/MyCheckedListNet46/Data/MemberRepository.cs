@@ -14,9 +14,14 @@ namespace MyCheckedListNet46.Data
             _context = context;
         }
 
-        public Member GetMemberProfile()
+        public Member GetMemberProfile(int memberId)
         {
-            throw new NotImplementedException();
+            return _context.Members.Where(x=>x.MemberId == memberId).FirstOrDefault();
+        }
+
+        public Member GetMemberProfile(string memberName)
+        {
+            return _context.Members.Where(x=>x.MemberName == memberName).FirstOrDefault();
         }
     }
 }

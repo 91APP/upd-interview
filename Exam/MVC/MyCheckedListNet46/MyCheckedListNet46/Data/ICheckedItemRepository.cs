@@ -8,6 +8,6 @@ namespace MyCheckedListNet46.Data
 {
     public interface ICheckedItemRepository
     {
-        List<CheckedItem> GetMemberCheckedItems();
+        List<CheckedItem> GetCheckedItemsByMemberId(int memberId);
     }
 }

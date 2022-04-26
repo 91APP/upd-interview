@@ -81,5 +81,14 @@ INSERT INTO [dbo].[Items]
            ('Item 1'),('Item 2'),('Item 3'),('Item 4')
 GO
 
+USE [MyCheckList]
+GO
+
+INSERT INTO [dbo].[Members]
+           ([MemberName])
+     VALUES
+           ('Member A'), ('Member B')
+GO
+
 
 

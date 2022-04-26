@@ -1,0 +1,14 @@
+﻿@using MyCheckedListNet46.Data
+@model Member
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+@using (Html.BeginForm("Login", "Member", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.TextBoxFor(m => m.MemberName, new { @class = "form-control", @placeholder = "Name" })
+    <br />
+    <button type="submit" class="btn">Sign In</button>
+}
