@@ -11,7 +11,7 @@ GO
 
 CREATE TABLE [dbo].[Members](
 	[MemberId] [int] IDENTITY(1,1) NOT NULL,
-	[MemberName] [nvarchar](max) NULL,
+	[MemberName] [nvarchar](50) NULL,
  CONSTRAINT [PK_Members] PRIMARY KEY CLUSTERED 
 (
 	[MemberId] ASC
@@ -32,7 +32,7 @@ GO
 
 CREATE TABLE [dbo].[Items](
 	[ItemId] [int] IDENTITY(1,1) NOT NULL,
-	[ItemName] [nvarchar](max) NULL,
+	[ItemName] [nvarchar](50) NULL,
  CONSTRAINT [PK_Items] PRIMARY KEY CLUSTERED 
 (
 	[ItemId] ASC
